@@ -1,8 +1,7 @@
 <launch>
-
+    <node name="logger" type="logger.py" pkg="robotics_assignment" output="screen" />
     <node name="mode_selector" type="main.py" pkg="robotics_assignment" output="screen" />
     <node name="teleop_control" type="teleop_control.py" pkg="robotics_assignment" output="screen" />
     <node name="screenshot_taker" type="take_screenshot.py" pkg="robotics_assignment" output="screen" />
     <node name="graph_plotter" type="plot_graph.py" pkg="robotics_assignment" output="screen" />
-    <node name="logger" type="logger.py" pkg="robotics_assignment" output="screen" />
 </launch>

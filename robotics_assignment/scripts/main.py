@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 20:31:57
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-29 12:48:05
+# @Last Modified time: 2021-09-29 21:34:33
 #!/usr/bin/env python
 import tty
 import sys
@@ -46,13 +46,20 @@ def mode_select(control_mode: list):
     try:
         if control_mode[0]:
             publish_teleop_mode.publish(True)
+
         if control_mode[1]:
             publish_screenshot_mode.publish(True)
             control_mode[1] = False
+
         if control_mode[2]:
             publish_graph_mode.publish(True)
+        else:
+            publish_graph_mode.publish(False)
+
         if control_mode[3]:
             publish_log_mode.publish(True)
+        else:
+            publish_log_mode.publish(False)
 
     except Exception as e:
         rospy.logerr(e)
@@ -84,10 +91,10 @@ def main():
                 rospy.loginfo("Saving log files")
                 control[3] = True
 
-            if key == "\x24":
+            if key == "\x18":
                 rospy.loginfo("Closing all modes. Returning to default.")
                 control = [False] * 4
-                
+
             if key == "\x03":
                 rospy.loginfo("Closing Mode Selection Node")
                 break

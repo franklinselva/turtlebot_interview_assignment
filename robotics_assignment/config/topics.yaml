@@ -1,0 +1,33 @@
+# @Author: Franklin Selva
+# @Date:   2021-09-29 18:19:05
+# @Last Modified by:   Franklin Selva
+# @Last Modified time: 2021-09-29 18:26:39
+odom_topic:
+  topic_name: "odom"
+  ns: "/"
+  type: "nav_msgs/Odometry"
+
+cmd_vel_topic:
+  topic_name: "cmd_vel"
+  ns: "/"
+  type: "geometry_msgs/Twist"
+
+imu_topic:
+  topic_name: "imu"
+  ns: "/"
+  type: "sensor_msgs/Imu"
+
+camera_info_topic:
+  topic_name: "camera/rgb/camera_info"
+  ns: "/"
+  type: "sensor_msgs/CameraInfo"
+
+depth_info_topic:
+  topic_name: "camera/depth/camera_info"
+  ns: "/"
+  type: "sensor_msgs/CameraInfo"
+
+scan_topic:
+  topic_name: "scan"
+  ns: "/"
+  type: "sensor_msgs/LaserScan"

@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 21:21:07
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-29 13:16:11
+# @Last Modified time: 2021-09-29 20:20:00
 #!/usr/bin/env python
 
 import rospy
@@ -21,17 +21,17 @@ STATUS: bool = False
 settings = termios.tcgetattr(sys.stdin)
 
 msg = """
-Control Your TurtleBot3!\n
+Control Your TurtleBot3!
 ---------------------------
-Moving around:\n
-        w\n
-   a    s    d\n
-        x\n
-\n
-w/x : increase/decrease linear velocity (Waffle Pi max : ~ 0.22)\n
-a/d : increase/decrease angular velocity (Waffle Pi max: ~ 0.22)\n
-\n
-space key, s : force stop\n
+Moving around:
+        w
+   a    s    d
+        x
+
+w/x : increase/decrease linear velocity (Waffle Pi max : ~ 0.22)
+a/d : increase/decrease angular velocity (Waffle Pi max: ~ 0.22)
+
+space key, s : force stop
 
 """
 
