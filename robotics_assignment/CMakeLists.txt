@@ -166,6 +166,7 @@ catkin_install_python(PROGRAMS
   scripts/take_screenshot.py
   scripts/plot_graph.py 
   scripts/logger.py 
+  scripts/diagnostics.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

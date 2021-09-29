@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 21:23:31
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-29 12:27:00
+# @Last Modified time: 2021-09-29 12:46:48
 #!/usr/bin/env python
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -60,17 +60,25 @@ def main():
     odom_subscriber = rospy.Subscriber("/odom", Odometry, odom_callback)
 
     pose_publisher = rospy.Publisher("robot_pose", Pose, queue_size=10)
+    status_publisher  = rospy.Publisher("graph_mode_status", Bool, queue_size=10)
     rate = rospy.Rate(60)
     global STATUS
     PLOT = Plotter()
+    init_pose = Pose()
 
     while not rospy.is_shutdown():
         pose_publisher.publish(current_pose)
         if STATUS:
-            PLOT.plot(current_pose)
+            pose = Pose()
+            pose.position.x = init_pose.position.x - current_pose.position.x
+            pose.position.y = init_pose.position.y - current_pose.position.y
+            PLOT.plot(pose)
             # plt.show()
             plt.draw()
             plt.pause(0.001)
+        else:
+            status_publisher.publish(False)
+            plt.close()
         rate.sleep()
 
 
