@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 20:31:57
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-28 23:03:26
+# @Last Modified time: 2021-09-29 11:37:43
 #!/usr/bin/env python
 import tty
 import sys
@@ -48,6 +48,7 @@ def mode_select(control_mode: list):
             publish_teleop_mode.publish(True)
         if control_mode[1]:
             publish_screenshot_mode.publish(True)
+            control_mode[1] = False
         if control_mode[2]:
             publish_graph_mode.publish(True)
         if control_mode[3]:
@@ -55,6 +56,8 @@ def mode_select(control_mode: list):
 
     except Exception as e:
         rospy.logerr(e)
+
+    return control_mode
 
 
 def main():
@@ -64,7 +67,7 @@ def main():
         rospy.loginfo("Starting Mode Selection Node")
         rate = rospy.Rate(60)
 
-        control = [bool] * 4
+        control = [False] * 4
 
         while not rospy.is_shutdown():
             key = get_key()
@@ -84,7 +87,7 @@ def main():
                 rospy.loginfo("Closing Mode Selection Node")
                 break
 
-            mode_select(control)
+            control = mode_select(control)
             rate.sleep()
 
     except Exception as e:
