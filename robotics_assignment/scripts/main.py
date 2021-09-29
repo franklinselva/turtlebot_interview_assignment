@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 20:31:57
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-29 11:37:43
+# @Last Modified time: 2021-09-29 12:39:28
 #!/usr/bin/env python
 import tty
 import sys
@@ -83,6 +83,11 @@ def main():
             if key == str(3):
                 rospy.loginfo("Saving log files")
                 control[3] = True
+
+            if key == "\x24":
+                rospy.loginfo("Closing all modes. Returning to default.")
+                control = [False] * 4
+                
             if key == "\x03":
                 rospy.loginfo("Closing Mode Selection Node")
                 break

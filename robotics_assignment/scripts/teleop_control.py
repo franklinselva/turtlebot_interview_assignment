@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 21:21:07
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-28 23:15:04
+# @Last Modified time: 2021-09-29 12:36:59
 #!/usr/bin/env python
 
 import rospy
@@ -33,7 +33,6 @@ a/d : increase/decrease angular velocity (Waffle Pi max: ~ 0.22)
 
 space key, s : force stop
 
-CTRL-C to stop teleop control
 """
 
 
@@ -159,10 +158,10 @@ def main():
                     target_linear_vel = 0.0
                     target_angular_vel = 0.0
                     print(vels(target_linear_vel, target_angular_vel))
-                else:
-                    if key == "\x03":
-                        publish_status.publish(False)
-                        rospy.loginfo("Closing Teleop control")
+                # else:
+                #     if key == "\x03":
+                #         publish_status.publish(False)
+                #         rospy.loginfo("Closing Teleop control")
 
                 if status == 20:
                     status = 0
