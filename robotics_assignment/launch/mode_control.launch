@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch" />
+    <node name="mode_selector" type="main.py" pkg="robotics_assignment" output="screen" />
+</launch>

@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 21:24:07
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-29 21:42:09
+# @Last Modified time: 2021-10-07 21:33:25
 #!/usr/bin/env python
 import os
 import yaml
@@ -80,6 +80,8 @@ def save_json(choice: str, handler: TopicDataHolder):
         "data",
         file_name,
     )
+    print(handler.topic)
+    print(type(handler.data), handler.data)
 
     with open(save_path, "w+") as f:
         json.dump(handler.data, f, indent=4)
@@ -94,6 +96,7 @@ def main():
 
     global STATUS
     PRINT_MSG: bool = True
+    SAVE: bool = True
     topic_handler: list[TopicDataHolder] = []
 
     topic_data = parse_yaml_file()
@@ -115,16 +118,18 @@ def main():
                     choice = topic
             rospy.loginfo(f"Started Recording messages: {choice}")
             PRINT_MSG = False
+        if not STATUS and SAVE:
+            for handler in topic_handler:
+                if handler.topic == choice:
+                    save_json(choice, handler)
+            PRINT_MSG = True
+            rate.sleep()
 
         for handler in topic_handler:
             if handler.topic == choice:
                 if STATUS:
                     handler.data["data"].append(handler.callback.msg)
-
-    else:
-        save_json(choice, handler)
-        PRINT_MSG = True
-        rate.sleep()
+                    SAVE = True
 
 
 if __name__ == "__main__":
