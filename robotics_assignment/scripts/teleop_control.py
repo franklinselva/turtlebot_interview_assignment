@@ -2,7 +2,7 @@
 # @Author: Franklin Selva
 # @Date:   2021-09-28 21:21:07
 # @Last Modified by:   Franklin Selva
-# @Last Modified time: 2021-09-29 20:20:00
+# @Last Modified time: 2021-10-07 22:11:29
 #!/usr/bin/env python
 
 import rospy
@@ -158,10 +158,11 @@ def main():
                     target_linear_vel = 0.0
                     target_angular_vel = 0.0
                     print(vels(target_linear_vel, target_angular_vel))
-                # else:
-                #     if key == "\x03":
-                #         publish_status.publish(False)
-                #         rospy.loginfo("Closing Teleop control")
+                else:
+                    if key == "\x03":
+                        publish_status.publish(False)
+                        rospy.loginfo("Closing Teleop control")
+                        break
 
                 if status == 20:
                     status = 0
